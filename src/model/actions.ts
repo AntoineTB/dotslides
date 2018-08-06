@@ -1,0 +1,4 @@
+const ACTIONS = {
+	PROVIDE_SCREEN_SIZE : "PROVIDE_SCREEN_SIZE",
+}
+export default ACTIONS
