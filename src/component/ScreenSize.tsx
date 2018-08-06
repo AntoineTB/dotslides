@@ -17,7 +17,10 @@ class dumb extends React.Component<any,any>{
   }
   public pingResize(){this.props.pingScreenSize()}
   public render(){return <div></div>}
-  public componentDidMount(){window.addEventListener("resize",this.pingResize)}
+  public componentDidMount(){
+    window.addEventListener("resize",this.pingResize)
+    this.pingResize()
+  }
   public componentWillUnmount(){window.removeEventListener("resize",this.pingResize)}
 }
 const ScreenSizeWatcher = connect(mapStateToProps,mapDispatchToProps)(dumb)
