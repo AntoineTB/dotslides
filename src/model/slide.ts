@@ -1,6 +1,7 @@
 interface Slide{
   shown : boolean
-  dotString : string
+  title? : string	
+  notes? : string
 }
 
  export default Slide
