@@ -1,5 +1,5 @@
-class MDSlide implements Slide{ //do i need to instruct where to find the interface?
+import Slide from "Slide"
+class MDSlide implements Slide{
 	mdString : string
 }
-
- export default MDSlide //do i need this, what is it for?
+ export default MDSlide
