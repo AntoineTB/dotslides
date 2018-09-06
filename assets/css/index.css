@@ -28,8 +28,24 @@
 	background-color:#fff;
 	box-shadow: 0px -1px 20px 0px #57575733;
 	margin-bottom:10px;
+	padding-left:3px;
 	cursor:pointer;
 }
 .SlideThumbnail > *{
 	padding: 8px;
+}
+.SlideThumbnail.selected_slide{
+	border-left: 3px solid orange;
+	padding-left:0px;
+}
+.SlideThumbnail.hidden_slide{
+	position:relative;
+}
+.SlideThumbnail.hidden_slide .overlay{
+  background-color: #ffffff88;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }

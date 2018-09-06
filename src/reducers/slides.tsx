@@ -1,6 +1,7 @@
 import Actions      from "../model/actions"
 import ReducerUtils from "../utils/ReducerUtils"
 import Slide        from "../model/slide"
+import DotSlide     from "../model/dotSlide"
 
 interface addSlideActionStruct{
   slide : Slide
@@ -10,7 +11,7 @@ export const addSlide = (state:Slide[], action : addSlideActionStruct) => {
   return [...state, action.slide]
 }
 
-const initialSlides:Slide[] = [
+const initialSlides:Slide[]|DotSlide[] = [
   {
     dotString : `graph A{label="1" a -- b -- {c d}}`,
     shown     : true,

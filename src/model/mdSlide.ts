@@ -1,5 +1,6 @@
-import Slide from "Slide"
-class MDSlide implements Slide{
+import Slide from "./slide"
+
+interface MDSlide extends Slide{
 	mdString : string
 }
  export default MDSlide

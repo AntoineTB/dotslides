@@ -7,6 +7,7 @@ import SlideThumbnail    from './slideThumbnail'
 interface SlidesListProps{
   slides : Slide[]
   setSelectedSlide : (Slide)=>void
+  selectedSlide : number
 }
 
 const SlidesList_dumb:React.SFC<SlidesListProps> = (props:SlidesListProps)=>{
@@ -14,9 +15,8 @@ const SlidesList_dumb:React.SFC<SlidesListProps> = (props:SlidesListProps)=>{
     <h2>SlidesList</h2>
     <div className='SlidesListGrid'>
       {props.slides.map((slide,idx)=>{
-        console.warn("here")
         return <div key={idx} className='SlidesListGridElement'>
-          <SlideThumbnail slide={slide} onClick={()=>props.setSelectedSlide(slide)}/>
+          <SlideThumbnail slide={slide} onClick={()=>props.setSelectedSlide(slide)} selected={props.selectedSlide==idx}/>
         </div>
       })}
     </div>
@@ -25,6 +25,7 @@ const SlidesList_dumb:React.SFC<SlidesListProps> = (props:SlidesListProps)=>{
 const mapStateToProps = state => {
   return {
     slides : state.Slides,
+    selectedSlide : state.SelectedSlide,
   }
 }
 const mapDispatchToProps = dispatch => {

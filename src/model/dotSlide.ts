@@ -1,5 +1,6 @@
-import Slide from "Slide"
-class DotSlide implements Slide{
+import Slide from "./slide"
+
+interface DotSlide extends Slide{
 	dotString : string
 }
  export default DotSlide
