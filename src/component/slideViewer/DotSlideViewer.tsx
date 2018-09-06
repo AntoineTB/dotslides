@@ -29,8 +29,9 @@ export class DotSlideViewer_dumb extends React.Component<DotSlideViewerProps,Dot
   }
   renderGraph(){
     console.log("rendering dot string")
-    d3Graphviz.graphviz(".dot_slide_view_port_"+this.state.uniqueid)
-    .renderDot(this.props.slide.dotString)
+    //console.log(d3Graphviz.graphviz) // object, contains a function named graphviz
+    d3.select(".dot_slide_view_port_"+this.state.uniqueid).graphviz().renderDot(this.props.slide.dotString)
+    //d3Graphviz.graphviz(".dot_slide_view_port_"+this.state.uniqueid).renderDot(this.props.slide.dotString)
     console.log("done rendering dot string")
   }
   componentDidMount(){this.renderGraph()}
