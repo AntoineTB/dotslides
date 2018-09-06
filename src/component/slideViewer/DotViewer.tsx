@@ -11,15 +11,7 @@ export class DotViewer extends React.Component<any,any>{
     </div>
   }
   renderGraph(){
-    console.log(d3) // d3 object, no graphviz key
-    console.log(d3.graphviz) // undefined
-    console.log(d3Graphviz.graphviz) // object, contains a function named graphviz
-    setTimeout(
-      ()=>{
-        d3.graphviz(".dot_view_port").renderDot("digraph{a->b}") // TypeError : d3.graphviz is not a function
-        d3Graphviz.graphviz(".dot_view_port").renderDot("digraph{a->b}") // Cannot call a class as a function (worker.onmessage @ d3-graphviz.js:1178)
-      },500
-    )
+    d3Graphviz.graphviz(".dot_view_port").renderDot("digraph{a->b}") // Cannot call a class as a function (worker.onmessage @ d3-graphviz.js:1178)
   }
   componentDidMount(){this.renderGraph()}
 }

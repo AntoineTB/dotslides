@@ -6,7 +6,7 @@ import Slide               from '../../model/slide'
 import DotSlide            from '../../model/dotSlide'
 
 interface DotSlideViewerProps{
-    slide : DotSlide
+  slide : DotSlide
 }
 interface DotSlideViewerState{
   uniqueid : string
@@ -21,22 +21,17 @@ export class DotSlideViewer_dumb extends React.Component<DotSlideViewerProps,Dot
     }
     this.renderGraph = this.renderGraph.bind(this)
   }
-
   render(){
+    const className = 'dot_slide_view_port_'+this.state.uniqueid
     return <div className='DotSlideViewer'>
-      <div className={'dot_slide_view_port_'+this.state.uniqueid}></div>
+      <div key={className+this.props.slide.dotString} className={className}></div>
     </div>
   }
   renderGraph(){
-    console.log(d3)
-    console.log(d3.graphviz)
-    console.log(d3Graphviz.graphviz)
-    setTimeout(
-      ()=>{
-        //d3.graphviz(".dot_slide_view_port_"+this.state.uniqueid).renderDot("digraph{a->b}")
-        d3Graphviz.graphviz(".dot_slide_view_port_"+this.state.uniqueid).renderDot("digraph{a->b}")
-      },500
-    )
+    console.log("rendering dot string")
+    d3Graphviz.graphviz(".dot_slide_view_port_"+this.state.uniqueid)
+    .renderDot(this.props.slide.dotString)
+    console.log("done rendering dot string")
   }
   componentDidMount(){this.renderGraph()}
   componentWillUpdate(){this.renderGraph()}

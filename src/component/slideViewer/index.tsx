@@ -11,8 +11,7 @@ interface SlideViewerProps{
 
 export const SlideViewer_dumb = (props:SlideViewerProps)=> {
   return <div className='SlideViewer'>
-    {/*props.slide.hasOwnProperty("dotString") ? <DotSlideViewer slide={props.slide as DotSlide}/> : "MDSlideViewer" */ }
-    <DotViewer/>
+    {props.slide.hasOwnProperty("dotString") ? <DotSlideViewer slide={props.slide as DotSlide}/> : "MDSlideViewer" }
   </div>
 }
 
