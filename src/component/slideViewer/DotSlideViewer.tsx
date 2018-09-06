@@ -10,6 +10,8 @@ interface DotSlideViewerProps{
 }
 interface DotSlideViewerState{
   uniqueid : string
+  renderer : undefined|d3Graphviz.graphviz
+  rendererReady : boolean
 }
 
 export class DotSlideViewer_dumb extends React.Component<DotSlideViewerProps,DotSlideViewerState>{
@@ -17,25 +19,46 @@ export class DotSlideViewer_dumb extends React.Component<DotSlideViewerProps,Dot
   constructor(props:DotSlideViewerProps){
     super(props)
     this.state = {
-      uniqueid : (""+Math.random()).replace(".","")
+      uniqueid : (""+Math.random()).replace(".",""),
+      renderer : undefined,
+      rendererReady : false,
     }
     this.renderGraph = this.renderGraph.bind(this)
   }
   render(){
-    const className = 'dot_slide_view_port_'+this.state.uniqueid
+    const className = 'dot_slide_view_port'
     return <div className='DotSlideViewer'>
-      <div key={className+this.props.slide.dotString} className={className}></div>
+      <div className={className}></div>
     </div>
   }
   renderGraph(){
-    console.log("rendering dot string")
-    //console.log(d3Graphviz.graphviz) // object, contains a function named graphviz
-    d3.select(".dot_slide_view_port_"+this.state.uniqueid).graphviz().renderDot(this.props.slide.dotString)
-    //d3Graphviz.graphviz(".dot_slide_view_port_"+this.state.uniqueid).renderDot(this.props.slide.dotString)
-    console.log("done rendering dot string")
+    if(!this.state.rendererReady){return}
+      console.log("rendering")
+      console.warn(this.props.slide.dotString)
+      this.state.renderer.renderDot(this.props.slide.dotString)
   }
-  componentDidMount(){this.renderGraph()}
-  componentWillUpdate(){this.renderGraph()}
+  componentDidMount(){
+    if(this.state.rendererReady===false){
+      var renderer = d3.select(".dot_slide_view_port").graphviz()
+      this.setState({renderer:renderer})
+      renderer = renderer.transition(()=>{
+        return d3
+          .transition("main")
+          .ease(d3.easeLinear)
+          .delay(100)
+          .duration(400)
+        })
+        .logEvents(true)
+        .on("initEnd",()=>{
+          this.setState({
+            rendererReady : true,
+            renderer : renderer
+          })
+          this.renderGraph()
+        })
+    }
+  }
+  componentDidUpdate(){this.renderGraph()}
 }
 
 const mapStateToProps = state => {

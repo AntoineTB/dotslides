@@ -49,3 +49,8 @@
   top: 0;
   bottom: 0;
 }
+.SlideContainer .DotSlideViewer .dot_slide_view_port{
+	height: 400px;
+	min-width: 400px;
+	background-color:green;
+}
