@@ -6,7 +6,7 @@ import Slide               from '../../model/slide'
 import DotSlide            from '../../model/dotSlide'
 
 interface DotSlideViewerProps{
-  slide : DotSlide
+  slide : DotSlide,
 }
 interface DotSlideViewerState{
   uniqueid : string
@@ -15,7 +15,8 @@ interface DotSlideViewerState{
 }
 
 export class DotSlideViewer_dumb extends React.Component<DotSlideViewerProps,DotSlideViewerState>{
-
+  static defaultProps = {
+  }
   constructor(props:DotSlideViewerProps){
     super(props)
     this.state = {
@@ -24,22 +25,30 @@ export class DotSlideViewer_dumb extends React.Component<DotSlideViewerProps,Dot
       rendererReady : false,
     }
     this.renderGraph = this.renderGraph.bind(this)
+    this.getClassName = this.getClassName.bind(this)
   }
   render(){
-    const className = 'dot_slide_view_port'
     return <div className='DotSlideViewer'>
-      <div className={className}></div>
+      <div className={this.getClassName()}></div>
     </div>
   }
+  getClassName() : string {return 'dot_slide_view_port'+this.state.uniqueid}
   renderGraph(){
     if(!this.state.rendererReady){return}
-      console.log("rendering")
-      console.warn(this.props.slide.dotString)
-      this.state.renderer.renderDot(this.props.slide.dotString)
+    const bounds = document
+      .querySelectorAll("."+this.getClassName())[0]
+      .getBoundingClientRect()
+    const width = bounds.width
+    this.state.renderer.options({
+      fit:true,
+      width:width,
+      engine:this.props.slide.engine?this.props.slide.engine:"dot",
+    })
+    this.state.renderer.renderDot(this.props.slide.dotString)
   }
   componentDidMount(){
     if(this.state.rendererReady===false){
-      var renderer = d3.select(".dot_slide_view_port").graphviz()
+      var renderer = d3.select(".dot_slide_view_port"+this.state.uniqueid).graphviz()
       this.setState({renderer:renderer})
       renderer = renderer.transition(()=>{
         return d3
@@ -47,15 +56,15 @@ export class DotSlideViewer_dumb extends React.Component<DotSlideViewerProps,Dot
           .ease(d3.easeLinear)
           .delay(100)
           .duration(400)
+      })
+      //.logEvents(true)
+      .on("initEnd",()=>{
+        this.setState({
+          rendererReady : true,
+          renderer : renderer
         })
-        .logEvents(true)
-        .on("initEnd",()=>{
-          this.setState({
-            rendererReady : true,
-            renderer : renderer
-          })
-          this.renderGraph()
-        })
+        this.renderGraph()
+      })
     }
   }
   componentDidUpdate(){this.renderGraph()}

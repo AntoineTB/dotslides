@@ -8,8 +8,10 @@ import MainRouting                from "./routing/mainRouting"
 import ScreenSize                 from "./component/ScreenSize"
 import Header                     from "./component/header"
 import * as d3Graphviz            from 'd3-graphviz'
+import Viz                        from "viz.js/viz";
 
-const _ = d3Graphviz.graphviz //Preload d3Graphiz so it register itself in d3 as a plugin
+const _1 = d3Graphviz.graphviz //Preload d3Graphiz so it register itself in d3 as a plugin
+const _2 = Viz //Preloading
 
 ReactDOM.render(
   <Provider store={store}>

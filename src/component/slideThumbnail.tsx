@@ -1,5 +1,7 @@
-import * as React       from 'react'
-import Slide            from '../model/slide'
+import * as React            from 'react'
+import Slide                 from '../model/slide'
+import DotSlide              from '../model/dotSlide'
+import DotSlideThumbnail     from './dotSlideThumbnail'
 
 interface SlideThumbnailProps{
   slide : Slide
@@ -13,7 +15,12 @@ const SlideThumbnail:React.SFC<SlideThumbnailProps> = (props:SlideThumbnailProps
   return (
     <div className={"SlideThumbnail "+shownClass+" "+selectedClass} onClick={props.onClick}>
       <div className='overlay'></div>
-      <div>Thumb</div>
+      <div>{
+        props.slide.hasOwnProperty("dotString")
+        ? <DotSlideThumbnail slide={props.slide as DotSlide}/>
+        : "MDSlideViewer"
+
+      }</div>
     </div>
   )
 }

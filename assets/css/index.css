@@ -14,6 +14,8 @@
 	display:grid;
 	grid-template-columns: 200px 1fr;
 }
+.Slides .SlidesListContainer {
+}
 .Slides .SlidesListContainer .SlidesList{
 	height:100vh;
 	padding:10px;
@@ -22,6 +24,7 @@
 .Slides .SlideContainer{
 	padding:10px;
 	height:100vh;
+	width: calc(100vw - 200px);
 }
 .SlideThumbnail{
 	height:140px;
@@ -49,8 +52,9 @@
   top: 0;
   bottom: 0;
 }
-.SlideContainer .DotSlideViewer .dot_slide_view_port{
-	height: 400px;
-	min-width: 400px;
-	background-color:green;
+.SlideContainer .DotSlideViewer>div{
+	text-align:center;
+}
+.Slides .SlidesListContainer .SlidesList .DotSlideThumbnail {
+	height:122px;
 }
