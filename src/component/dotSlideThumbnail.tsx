@@ -30,7 +30,7 @@ class DotSlideThumbnail extends React.Component<DotSlideThumbnailProps,DotSlideT
   }
   render(){
     return <div className='DotSlideThumbnail'>
-      <div>Dot Slide</div>
+      <div>{this.props.slide.title}</div>
       <div className={this.getClassName()}></div>
     </div>
   }

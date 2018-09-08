@@ -14,12 +14,14 @@ export const addSlide = (state:Slide[], action : addSlideActionStruct) => {
 
 const initialDotSlides:DotSlide[] = [
   {
+    engine    : Engine.circo,
+    title     : "Demo 1",
     dotString : `graph A{label="1" a -- b -- {c d}}`,
     shown     : true,
-    engine    : Engine.circo,
   },
   {
     engine : Engine.dot,
+    title     : "Services map",
     dotString : `
       // #fbbc04 # component
       // #4285f4 # user-facing service
@@ -184,16 +186,19 @@ const initialDotSlides:DotSlide[] = [
   },
   {
     engine : Engine.dot,
+    title     : "Option 1",
     dotString : `graph A{label="3" a -- b -- { c d }}`,
     shown     : false,
   },
   {
     engine : Engine.dot,
+    title     : "Option 2",
     dotString : `graph A{label="4" a -- { b c d }}`,
     shown     : true,
   },
   {
     engine : Engine.dot,
+    title     : "Option 3",
     dotString : `graph A{label="5" {a b c d} -- {a b c d}}`,
     shown     : true,
   },
